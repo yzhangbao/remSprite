@@ -8,11 +8,12 @@ var gulp = require('gulp'),
     uglify = require('gulp-uglify'),
     imagemin = require('gulp-imagemin'),
     browserSync = require('browser-sync'),
+    spritesmith = require('gulp.spritesmith'),
     watch = require('gulp-watch'),
 
     paths = {
         'html' : ['src/**/*.html'],
-        'image': ['src/**/*.+(jpg|png|gif)'],
+        'image': ['src/**/*.+(jpg|png|gif)','!src/**/icons/*.+(jpg|png|gif)'],
       	'scss' : ['src/**/*.scss'],
         'css'  : ['src/**/*.css'],
       	'lib'  : ['src/**/rui.js'],
@@ -61,6 +62,19 @@ gulp.task('uglify',function(){
       .pipe(gulp.dest('dist'))
 });
 
+gulp.task('spritesmith', function(){
+    return gulp.src('src/images/icons/*.+(jpg|png|gif)')
+        .pipe(spritesmith({
+            prefixName: 'icon',
+            imgName: 'images/icons.png',     // 生成的图片
+            cssName: 'scss/_icons.scss',    // 生成的sass文件
+            padding: 10,              // 图标之间的距离
+            algorithm: 'binary-tree', // 图标的排序方式
+            cssTemplate: './handlebarsInheritance.scss.handlebars' // 模板
+        }))
+        .pipe(gulp.dest('src'));
+});
+
 gulp.task('watch',function(){
     gulp.watch(paths.scss, ['scss']);
 });
@@ -81,7 +95,7 @@ gulp.task('browsersync',function(){
 	});
 });
 
-gulp.task('default',['watch'],function(){
+gulp.task('default',['spritesmith','watch'],function(){
     gulp.start('browsersync');
     gulp.start('scss');
 });

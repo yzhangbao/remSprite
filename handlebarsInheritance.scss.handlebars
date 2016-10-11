@@ -1,0 +1,21 @@
+{{#extend "scss"}}
+	{{#content "sprites"}}
+		{{#each sprites}}
+			.{{name}} {
+				width: pxToRem({{width}}px);
+				height: pxToRem({{height}}px);
+			    background-position: {{offset_x}}/({{width}}-{{total_width}})*100% {{offset_y}}/({{height}}-{{total_height}})*100%;
+			}
+		{{/each}}
+	{{/content}}
+	{{#content "spritesheet"}}
+		.{{spritesheet.name}} {
+			display: inline-block;
+			vertical-align: middle;
+			margin-top: pxToRem(-3px);
+		    background-image: url('{{{spritesheet.escaped_image}}}');
+		    background-repeat: no-repeat;
+		    background-size: pxToRem({{spritesheet.width}}px) pxToRem({{spritesheet.height}}px);
+		}
+	{{/content}}
+{{/extend}}

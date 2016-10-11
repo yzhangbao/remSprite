@@ -1,4 +1,25 @@
 @charset "utf-8";
+@charset "utf-8";
+$baseFontSize: 100px !default;
+@function pxToRem($px: 16) {
+  @return $px / $baseFontSize / 2 * 1rem;
+}
+@function strip-units($number){
+    @return $number / ($number * 0 + 1);
+}
+@mixin remlace($property, $values...) {
+  $max: length($values);
+  $remValues: '';
+  @for $i from 1 through $max {
+    $value: strip-units(nth($values, $i));
+    $defaultFontSize: strip-units($baseFontSize);
+    $remValues: #{$remValues + $value / $defaultFontSize / 2 * 1rem};
+    @if $i < $max {
+      $remValues: #{$remValues + " "};
+    }
+  } 
+  #{$property}: $remValues; 
+}
 /*! normalize.css v4.1.1 | MIT License | github.com/necolas/normalize.css */
 
 /**

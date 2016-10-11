@@ -1,24 +1,4 @@
 @charset "utf-8";
-$baseFontSize: 100px !default;
-@function pxToRem($px: 16) {
-  @return $px / $baseFontSize / 2 * 1rem;
-}
-@function strip-units($number){
-    @return $number / ($number * 0 + 1);
-}
-@mixin remlace($property, $values...) {
-  $max: length($values);
-  $remValues: '';
-  @for $i from 1 through $max {
-    $value: strip-units(nth($values, $i));
-    $defaultFontSize: strip-units($baseFontSize);
-    $remValues: #{$remValues + $value / $defaultFontSize / 2 * 1rem};
-    @if $i < $max {
-      $remValues: #{$remValues + " "};
-    }
-  } 
-  #{$property}: $remValues; 
-}
 html {font-size:625%;color:#000;-webkit-tap-highlight-color: transparent;}
 html,body{height:100%;}
 body{overflow-x: hidden;max-width:750px;margin:0 auto;background-color:#EFEEF4;}
@@ -65,15 +45,6 @@ body{overflow-x: hidden;max-width:750px;margin:0 auto;background-color:#EFEEF4;}
 	max-width: 750px;
 	margin: 0 auto;
 }
-.icon{
-	display: inline-block;
-	@include remlace(width,90px);
-	@include remlace(height,90px);
-	background: url(../images/icons.png) no-repeat;
-	background-size: pxToRem(90px) auto;
-	vertical-align: middle;
-	overflow: hidden;
-}
 h3{
 	@include remlace(margin,20px);
 	@include remlace(font-size,32px);
@@ -85,17 +56,26 @@ li{
 	@include remlace(margin,10px,0);
 	@include remlace(font-size,28px);
 }
-.dom01{
-	@for $i from 0 through 2{
-		.icon#{$i}{
-			background-position: 0 pxToRem(-90px)*$i;
-		}
-	}
+.icon{
+  display: inline-block;
+  @include remlace(width,90px);
+  @include remlace(height,90px);
+  background: url(../images/icons.png) no-repeat;
+  background-size: pxToRem(187px) auto;
+  vertical-align: middle;
+  overflow: hidden;
 }
-.dom02{
-	@for $i from 0 through 2{
-		.icon#{$i}{
-			background-position: 0 -90*$i/(90-270)*100%;
-		}
-	}
+.dom01{
+  @for $i from 0 through 2{
+    @if $i==1 {
+      .icon#{$i}{
+        background-position: pxToRem(-99px)*$i 0;
+      }
+    }
+    @if $i==2{
+      .icon#{$i}{
+        background-position: 0 pxToRem(-98px)*($i - 1);
+      }
+    }
+  }
 }

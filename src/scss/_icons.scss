@@ -1,0 +1,38 @@
+/*
+SCSS variables are information about icon's compiled state, stored under its original file name
+
+.icon-home {
+  width: $icon-home-width;
+}
+
+The large array-like variables contain all information about a single icon
+$icon-home: x y offset_x offset_y width height total_width total_height image_path;
+
+At the bottom of this section, we provide information about the spritesheet itself
+$spritesheet: width height image $spritesheet-sprites;
+*/
+			.icon-cham {
+				width: pxToRem(88px);
+				height: pxToRem(88px);
+			    background-position: -99/(88-187)*100% 0/(88-186)*100%;
+			}
+			.icon-new {
+				width: pxToRem(89px);
+				height: pxToRem(88px);
+			    background-position: 0/(89-187)*100% 0/(88-186)*100%;
+			}
+			.icon-tyrant {
+				width: pxToRem(88px);
+				height: pxToRem(88px);
+			    background-position: 0/(88-187)*100% -98/(88-186)*100%;
+			}
+		.spritesheet {
+			display: inline-block;
+			vertical-align: middle;
+			margin-top: pxToRem(-3px);
+		    background-image: url('../images/icons.png');
+		    background-repeat: no-repeat;
+		    background-size: pxToRem(187px) pxToRem(186px);
+		}
+
+
