@@ -68,6 +68,7 @@ gulp.task('spritesmith', function(){
             prefixName: 'icon',
             imgName: 'images/icons.png',     // 生成的图片
             cssName: 'scss/_icons.scss',    // 生成的sass文件
+            //cssSpritesheetName: '', // 不解释
             padding: 10,              // 图标之间的距离
             algorithm: 'binary-tree', // 图标的排序方式
             cssTemplate: './handlebarsInheritance.scss.handlebars' // 模板
