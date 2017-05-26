@@ -11,9 +11,15 @@ $baseFontSize: 100px !default;
   $max: length($values);
   $remValues: '';
   @for $i from 1 through $max {
-    $value: strip-units(nth($values, $i));
-    $defaultFontSize: strip-units($baseFontSize);
-    $remValues: #{$remValues + $value / $defaultFontSize / 2 * 1rem};
+    $val: nth($values, $i);
+    @if $val == auto{
+      $remValues: #{$remValues + auto};
+    }
+    @else {
+      $value: strip-units($val);
+      $defaultFontSize: strip-units($baseFontSize);
+      $remValues: #{$remValues + $value / $defaultFontSize / 2 * 1rem};
+    }
     @if $i < $max {
       $remValues: #{$remValues + " "};
     }
